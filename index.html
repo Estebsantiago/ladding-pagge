@@ -1,297 +1,526 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soluciones Estefer - Servicios Profesionales</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soluciones Estefer — Electricidad • Plomería • Remodelaciones</title>
+  <meta name="description" content="Soluciones Estefer: servicios profesionales de electricidad, plomería y remodelaciones. Cotiza rápido por WhatsApp." />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
+    :root{
+      --accent1:#ffb800;
+      --accent2:#ff4800;
+      --glass: rgba(255,255,255,0.06);
+      --muted:#cfcfcf;
+      --card-radius:18px;
+      --maxw:1200px;
     }
-
-    body {
-      background: url('https://images.unsplash.com/photo-1560184897-85f6d2b6b9b1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat fixed;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       color: #fff;
-      overflow-x: hidden;
-      position: relative;
+      background:#000;
+      -webkit-font-smoothing:antialiased;
     }
+    a{color:inherit;text-decoration:none}
 
-    /* Superposición oscura para contraste */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: -1;
-    }
+    /* HERO + BACKGROUND */
+    .hero-wrap{position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:48px 20px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=80');background-size:cover;background-position:center center;filter:contrast(0.9) saturate(0.9);transform:scale(1.03);z-index:0}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45) 10%,rgba(0,0,0,0.7) 70%);z-index:1}
+    .hero-veil{position:absolute;inset:-20%;background:radial-gradient(800px 400px at 10% 10%, rgba(255,72,0,0.06), transparent 4%),radial-gradient(600px 320px at 80% 70%, rgba(255,184,0,0.06), transparent 4%);mix-blend-mode:screen;z-index:2;animation:slow-rotate 18s linear infinite;pointer-events:none}
+    @keyframes slow-rotate{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2%) rotate(180deg)}100%{transform:translateY(0) rotate(360deg)}}
+    #particles{position:absolute;inset:0;z-index:3;pointer-events:none}
 
-    header {
-      text-align: center;
-      padding: 80px 20px 40px;
-      background: linear-gradient(135deg, rgba(255,184,0,0.9), rgba(255,72,0,0.9));
-      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+    .hero{position:relative;z-index:4;max-width:var(--maxw);width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px}
+    .hero-content{text-align:left;padding:28px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));border-radius:var(--card-radius);backdrop-filter: blur(6px) saturate(1.1);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:700;font-size:0.95rem}
+    .brand-badge{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 18px rgba(255,72,0,0.14)}
+    h1{font-size:2.1rem;margin:12px 0 6px;letter-spacing:0.6px}
+    p.lead{color:var(--muted);margin-bottom:18px;line-height:1.45}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn{border:0;cursor:pointer;padding:12px 18px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:10px;box-shadow:0 6px 20px rgba(0,0,0,0.45)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--muted)}
+    .hero-stats{display:flex;gap:18px;margin-top:18px;color:var(--muted);font-size:0.9rem}
+    .stat{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+    .stat strong{color:var(--accent1);font-size:1.1rem}
 
-    header h1 {
-      font-size: 3em;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-    }
+    .quick-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(2,2,2,0.6)}
+    .quick-card h4{margin:0 0 8px}
+    .service-list{display:grid;gap:8px;max-height:58vh;overflow:auto;padding-right:6px}
+    .service-item{display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(255,255,255,0.02);border-radius:10px;font-size:0.95rem}
+    .service-price{color:var(--accent1);font-weight:700}
+    .service-item label{display:flex;align-items:center;gap:8px;cursor:pointer}
 
-    header p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
+    main{max-width:var(--maxw);margin:28px auto;padding:0 18px 120px;display:grid;gap:28px}
+    .controls{display:flex;gap:12px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+    .cat-btn{background:var(--glass);padding:10px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .cat-btn.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111;font-weight:700;transform:translateY(-4px)}
 
-    .botones {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 60px 0;
-      flex-wrap: wrap;
-    }
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:14px 14px 18px;box-shadow:0 8px 30px rgba(0,0,0,0.6);transform:translateY(18px);opacity:0;transition:all .5s cubic-bezier(.2,.9,.2,1);border:1px solid rgba(255,255,255,0.02)}
+    .card.visible{transform:none;opacity:1}
+    .card img.card-img{width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:10px}
 
-    .boton {
-      background: linear-gradient(135deg, #ffb800, #ff4800);
-      color: #fff;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.1em;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255, 120, 0, 0.5);
-    }
+    .card h3{margin:0 0 8px;color:var(--accent1);font-size:1.02rem}
+    .price{font-weight:700;color:var(--accent2)}
+    .desc{color:var(--muted);font-size:0.92rem;margin-top:8px}
 
-    .boton:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(255, 160, 0, 0.8);
-    }
+    .service-checkbox{display:flex;align-items:center;gap:10px;margin-top:10px}
+    .service-checkbox input[type="checkbox"]{width:18px;height:18px;accent-color:var(--accent2);cursor:pointer}
 
-    .contenedor-servicios {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
-      gap: 25px;
-    }
+    .selection-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:92px;background:linear-gradient(90deg,rgba(0,0,0,0.7),rgba(0,0,0,0.6));padding:10px 16px;border-radius:999px;display:flex;gap:12px;align-items:center;z-index:999;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+    .selection-count{background:var(--accent1);color:#111;padding:6px 10px;border-radius:999px;font-weight:700}
 
-    .servicio {
-      width: 300px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 25px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-      transform: scale(0.9);
-      opacity: 0;
-    }
+    /* floating WhatsApp + send */
+    .whatsapp{position:fixed;right:20px;bottom:20px;z-index:9999;width:64px;height:64px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#25d366,#1ebd5b);box-shadow:0 12px 40px rgba(37,211,102,0.16);font-size:28px;cursor:pointer;border:0}
+    .send-btn{position:fixed;right:100px;bottom:26px;z-index:9999;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111;padding:12px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;box-shadow:0 12px 40px rgba(255,72,0,0.14)}
+    .send-btn:disabled{opacity:0.5;cursor:not-allowed}
 
-    .servicio.visible {
-      transform: scale(1);
-      opacity: 1;
-      transition: all 0.6s ease;
-    }
+    footer{background:rgba(0,0,0,0.85);color:var(--muted);padding:28px;text-align:center;border-top:1px solid rgba(255,255,255,0.03)}
 
-    .servicio h3 {
-      color: #ffb800;
-      margin-bottom: 10px;
-      font-size: 1.3em;
-    }
-
-    .servicio p {
-      font-size: 0.95em;
-      line-height: 1.4em;
-      color: #ddd;
-    }
-
-    footer {
-      text-align: center;
-      padding: 60px 20px;
-      background: rgba(0,0,0,0.85);
-      margin-top: 60px;
-      color: #888;
-      font-size: 0.9em;
-    }
-
-    footer span {
-      color: #ffb800;
-    }
-
-    /* Botón flotante de WhatsApp */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #25d366;
-      color: white;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2em;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
-      text-decoration: none;
-      z-index: 999;
-    }
-
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-    }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 2em; }
-      .boton { font-size: 1em; padding: 12px 25px; }
-      .servicio { width: 90%; }
-    }
+    /* responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr;padding:20px}.hero-content{text-align:center}}
+    @media (max-width:520px){h1{font-size:1.6rem}.brand{justify-content:center}.selection-bar{display:none}.send-btn{right:20px;bottom:96px;width:calc(100% - 48px);left:24px;right:24px;}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Soluciones Estefer</h1>
-    <p>Tu aliado en Electricidad, Plomería y Remodelaciones</p>
-  </header>
 
-  <div class="botones">
-    <button class="boton" onclick="mostrarServicios('electricidad')">⚡ Electricidad</button>
-    <button class="boton" onclick="mostrarServicios('plomeria')">🔧 Plomería</button>
-    <button class="boton" onclick="mostrarServicios('remodelaciones')">🏠 Remodelaciones</button>
+  <!-- HERO -->
+  <div class="hero-wrap" role="banner" aria-label="Hero - Soluciones Estefer">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <div class="hero">
+      <div class="hero-content" id="heroContent">
+        <div class="brand">
+          <div class="brand-badge">🔧</div>
+          <div>
+            <div style="font-size:0.9rem">Soluciones Estefer</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Electricidad • Plomería • Remodelaciones</div>
+          </div>
+        </div>
+
+        <h1>Reparaciones y remodelaciones con garantía — <span style="color:var(--accent1)">cotiza rápido por WhatsApp</span></h1>
+        <p class="lead">Selecciona los servicios que necesitas y envía tu solicitud en un solo mensaje. Atención emergencia y proyectos planificados.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" id="ctaWhats" href="https://wa.me/573026645791?text=Hola%20Soluciones%20Estefer%2C%20quiero%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
+          <button class="btn btn-ghost" id="verServiciosBtn">Ver servicios</button>
+        </div>
+
+        <div class="hero-stats" aria-hidden="true">
+          <div class="stat"><strong>+6 años</strong><span style="color:var(--muted)">Experiencia</span></div>
+          <div class="stat"><strong>+2.500</strong><span style="color:var(--muted)">Trabajos realizados</span></div>
+          <div class="stat"><strong>Atención 24h</strong><span style="color:var(--muted)">Emergencias</span></div>
+        </div>
+      </div>
+
+      <aside class="quick-card" aria-label="Servicios rápidos">
+        <h4>Servicios Rápidos</h4>
+        <div class="service-list" id="quickServices">
+          <!-- JS fills with checkboxes so user can seleccionar rápido -->
+        </div>
+      </aside>
+    </div>
   </div>
 
-  <div id="servicios" class="contenedor-servicios"></div>
+  <!-- MAIN -->
+  <main>
+    <section aria-labelledby="servicesTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="section-title"><h2 id="servicesTitle">Nuestros Servicios</h2></div>
+        <div style="font-size:0.9rem;color:var(--muted)"><strong>Selecciona</strong> los servicios deseados y presiona <strong>Enviar</strong></div>
+      </div>
 
-  <footer>
-    © 2025 <span>Soluciones Estefer</span> - Todos los derechos reservados.
-  </footer>
+      <div class="controls" role="tablist" aria-label="Categorías">
+        <button class="cat-btn active" data-cat="electricidad">⚡ Electricidad</button>
+        <button class="cat-btn" data-cat="plomeria">🔧 Plomería</button>
+        <button class="cat-btn" data-cat="remodelaciones">🏠 Remodelaciones</button>
+        <button class="cat-btn" data-cat="rapidos">⚡ Rápidos</button>
+      </div>
 
-  <!-- Botón flotante WhatsApp -->
-  <a class="whatsapp-btn" href="https://wa.me/573026645791?text=Hola%20quiero%20cotizar%20un%20servicio%20con%20Soluciones%20Estefer" target="_blank">
-    💬
-  </a>
+      <div class="cards-grid" id="cardsGrid" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="portfolioTitle">
+      <div class="section-title"><h2 id="portfolioTitle">Portafolio (ejemplos)</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <!-- Reemplazadas por imágenes estables -->
+        <img loading="lazy" alt="Remodelación de cocina" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
+        <img loading="lazy" alt="Instalación eléctrica" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
+        <img loading="lazy" alt="Baño renovado" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
+        <img loading="lazy" alt="Instalación de luminarias" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=60" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
+      </div>
+    </section>
+
+    <section aria-labelledby="testTitle">
+      <div class="section-title"><h2 id="testTitle">Testimonios</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;color:var(--muted)">"Excelente trabajo: llegaron a tiempo y dejaron todo limpio" — <strong>María P.</strong></div>
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;color:var(--muted)">"Solucionaron una fuga que nadie pudo arreglar" — <strong>Carlos R.</strong></div>
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;color:var(--muted)">"Instalación de cocina perfecta, muy recomendados" — <strong>Ana G.</strong></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="contactTitle">
+      <div class="section-title"><h2 id="contactTitle">Contacto</h2></div>
+      <p style="color:var(--muted)">Haz clic en <strong>Enviar</strong> para enviar los servicios seleccionados por WhatsApp o usa el botón de chat. Correo: <strong>santiabril97@gmail.com</strong></p>
+    </section>
+  </main>
+
+  <footer>© 2025 <strong>Soluciones Estefer</strong> — Hecho con profesionalismo.</footer>
+
+  <!-- selection bar + send -->
+  <div class="selection-bar" id="selectionBar" aria-hidden="false" style="display:none">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="selection-count" id="selCount">0</div>
+      <div style="color:var(--muted)">Servicios seleccionados</div>
+    </div>
+    <div style="width:12px"></div>
+    <button class="btn btn-ghost" id="clearSel">Limpiar</button>
+    <button class="send-btn" id="sendWhats" title="Enviar servicios seleccionados por WhatsApp" aria-label="Enviar servicios seleccionados por WhatsApp">Enviar por WhatsApp</button>
+  </div>
+
+  <!-- floating whatsapp (direct chat if user wants quick) -->
+  <a class="whatsapp" id="whBtn" href="https://wa.me/573026645791?text=Hola%20Soluciones%20Estefer%2C%20quiero%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">💬</a>
 
   <script>
+    /* ===========================
+       Data: servicios ampliados (+ rapidos con precios realistas)
+       =========================== */
     const dataServicios = {
       electricidad: [
-        { nombre: "Instalación de tomas y enchufes", precio: "$40.000" },
-        { nombre: "Cambio o instalación de breakers", precio: "$35.000" },
-        { nombre: "Instalación de lámparas LED y reflectores", precio: "$25.000" },
-        { nombre: "Cableado general o parcial", precio: "$180.000" },
-        { nombre: "Mantenimiento eléctrico residencial", precio: "$90.000" },
-        { nombre: "Revisión de cortos o sobrecargas", precio: "$60.000" },
-        { nombre: "Puesta a tierra y balanceo de carga", precio: "$75.000" },
-        { nombre: "Instalación de ventiladores o extractores", precio: "$70.000" },
-        { nombre: "Montaje de televisores o soportes", precio: "$45.000" },
-        { nombre: "Instalación de sensores o interruptores inteligentes", precio: "$95.000" },
-        { nombre: "Automatización de luces y enchufes", precio: "$300.000" },
-        { nombre: "Diagnóstico eléctrico completo", precio: "$120.000" },
-        { nombre: "Instalación de medidor o contador", precio: "$90.000" },
-        { nombre: "Reparación de cortocircuitos", precio: "$80.000" },
-        { nombre: "Cableado estructurado para internet o TV", precio: "$250.000" },
-        { nombre: "Instalación de panel solar básico", precio: "$400.000" },
-        { nombre: "Apertura de chazo para canalización eléctrica", precio: "$50.000/m" }
+        { nombre: "Instalación de tomas y enchufes", precio: "$45.000", desc:"Enchufes nuevos con conexión segura y prueba final",  },
+        { nombre: "Cambio o instalación de breakers", precio: "$60.000", desc:"Sustitución o ampliación de tableros y breakers",  },
+        { nombre: "Instalación de lámparas LED y reflectores", precio: "$30.000", desc:"Luminarias y montaje con garantía",  },
+        { nombre: "Cableado general o parcial", precio: "$200.000", desc:"Cableado para viviendas y locales con materiales certificados" },
+        { nombre: "Mantenimiento eléctrico residencial", precio: "$110.000", desc:"Revisión y corrección de instalaciones" },
+        { nombre: "Revisión de cortos o sobrecargas", precio: "$70.000", desc:"Diagnóstico y solución de fallas eléctricas" },
+        { nombre: "Puesta a tierra y balanceo de carga", precio: "$90.000", desc:"Protección y seguridad para el hogar" },
+        { nombre: "Instalación de ventiladores o extractores", precio: "$80.000", desc:"Montaje y conexión eléctrica" },
+        { nombre: "Montaje de televisores o soportes", precio: "$55.000", desc:"Soporte, anclaje y ocultamiento de cableado" },
+        { nombre: "Instalación de sensores o interruptores inteligentes", precio: "$120.000", desc:"Control remoto y ahorro energético" },
+        { nombre: "Automatización de luces y enchufes", precio: "$350.000", desc:"Domótica básica para el hogar" },
+        { nombre: "Diagnóstico eléctrico completo", precio: "$150.000", desc:"Informe detallado y presupuesto" },
+        { nombre: "Instalación de medidor o contador", precio: "$120.000", desc:"Instalación técnica y pruebas" },
+        { nombre: "Reparación de cortocircuitos", precio: "$95.000", desc:"Solución urgente y segura" },
+        { nombre: "Cableado estructurado (internet/TV)", precio: "$280.000", desc:"Red local y conexiones TV/Internet" },
+        { nombre: "Instalación de panel solar básico", precio: "$500.000", desc:"Kit básico e instalación" },
+        { nombre: "Apertura de chazo para canalización eléctrica", precio: "$55.000/m", desc:"Canalización y sellado" },
+        { nombre: "Instalación de iluminación exterior y reflectores", precio: "$75.000", desc:"Iluminación seguridad y estética" }
       ],
       plomeria: [
-        { nombre: "Instalación o cambio de lavamanos", precio: "$70.000" },
-  { nombre: "Cambio de grifería o duchas", precio: "$45.000" },
-  { nombre: "Reparación de fugas de agua o gas", precio: "$30.000" },
-  { nombre: "Destape de tuberías o sifones", precio: "$60.000" },
-  { nombre: "Instalación de sanitarios o inodoros", precio: "$80.000" },
-  { nombre: "Instalación de lavadoras o calentadores", precio: "$85.000" },
-  { nombre: "Cambio de válvulas o llaves de paso", precio: "$40.000" },
-  { nombre: "Mantenimiento de redes hidráulicas", precio: "$100.000" },
-  { nombre: "Apertura de chazo para tubería", precio: "$45.000/m" },
-
-  // Servicios adicionales
-  { nombre: "Instalación de tuberías principales (agua fría / caliente)", precio: "$120.000/m" },
-  { nombre: "Sustitución completa de red hidráulica", precio: "$150.000/m" },
-  { nombre: "Instalación de sistemas de desagüe y bajantes", precio: "$110.000/m" },
-  { nombre: "Colocación de tuberías PPR, PVC o cobre", precio: "$100.000/m" },
-  { nombre: "Instalación de sistemas de presión de agua (hidroneumáticos)", precio: "$250.000" },
-  { nombre: "Detectores de fugas con geófono o cámara", precio: "$90.000" },
-  { nombre: "Limpieza y mantenimiento de tanques de agua", precio: "$120.000" },
-  { nombre: "Desinfección de redes de agua potable", precio: "$130.000" },
-  { nombre: "Instalación de trampas de grasa y rejillas", precio: "$80.000" },
-  { nombre: "Instalación o mantenimiento de bombas de agua", precio: "$200.000" },
-  { nombre: "Instalación de calentadores de gas / eléctricos", precio: "$150.000" },
-  { nombre: "Instalación de sistemas de gasodomésticos conectado a tubería", precio: "$140.000" },
-  { nombre: "Reparación o reemplazo de sifones, desagües o tuberías de desagüe", precio: "$50.000" },
-  { nombre: "Reposición de tuberías rotas o corroídas", precio: "$90.000" },
-  { nombre: "Adaptaciones de desagüe (baños, cocina, zona de lavado)", precio: "$100.000" },
-  { nombre: "Sondeos y limpieza con cámara de tuberías", precio: "$160.000" },
-  { nombre: "Intervenciones de urgencia 24 h (emergencias)", precio: "$120.000" },
-  { nombre: "Reparación de filtraciones y humedad en tuberías empotradas", precio: "$80.000" },
-  { nombre: "Remodelación completa de baño hidráulico", precio: "$350.000" },
-  { nombre: "Instalación de accesorios de baño (barra, toallero, jabonera)", precio: "$30.000" },
-  { nombre: "Garantía de trabajos de plomería", precio: "Incluida (según contrato)" }
+        { nombre: "Instalación o cambio de lavamanos", precio: "$80.000", desc:"Suministro y montaje de lavamanos", },
+        { nombre: "Cambio de grifería o duchas", precio: "$65.000", desc:"Remplazo con marcas confiables" },
+        { nombre: "Reparación de fugas de agua o gas", precio: "$50.000", desc:"Detección y reparación rápida" },
+        { nombre: "Destape de tuberías o sifones", precio: "$80.000", desc:"Limpieza con equipo profesional" },
+        { nombre: "Instalación de sanitarios o inodoros", precio: "$95.000", desc:"Fijación y sellado profesional" },
+        { nombre: "Instalación de lavadoras o calentadores", precio: "$120.000", desc:"Conexiones hidrosanitarias y eléctricas" },
+        { nombre: "Cambio de válvulas o llaves de paso", precio: "$55.000", desc:"Sustitución y prueba de hermeticidad" },
+        { nombre: "Mantenimiento de redes hidráulicas", precio: "$150.000", desc:"Revisión integral de redes" },
+        { nombre: "Apertura de chazo para tubería", precio: "$50.000/m", desc:"Apertura y reparación" },
+        { nombre: "Instalación de tuberías (PPR/PVC/cobre)", precio: "$120.000/m", desc:"Calidad según norma" },
+        { nombre: "Sustitución completa de red hidráulica", precio: "$180.000/m", desc:"Red nueva y garantía" },
+        { nombre: "Instalación de sistemas de desagüe y bajantes", precio: "$140.000/m", desc:"Desagüe pluvial y sanitario" },
+        { nombre: "Instalación de bombas e hidroneumáticos", precio: "$350.000", desc:"Presión constante y montaje" },
+        { nombre: "Detección de fugas con equipo especializado", precio: "$120.000", desc:"Localización sin romper" },
+        { nombre: "Limpieza y mantenimiento de tanques", precio: "$120.000", desc:"Desinfección y mantenimiento" },
+        { nombre: "Instalación de trampas de grasa", precio: "$120.000", desc:"Para cocinas y restaurantes" },
+        { nombre: "Instalación de calentadores (gas/eléctricos)", precio: "$180.000", desc:"Conexión segura y pruebas" },
+        { nombre: "Sondeo y limpieza con cámara", precio: "$220.000", desc:"Inspección interior de tuberías" },
+        { nombre: "Intervenciones de emergencia 24h", precio: "$150.000", desc:"Respuesta rápida garantizada" },
+        { nombre: "Remodelación completa de baño hidráulico", precio: "$450.000", desc:"Obra integral hidráulica" }
       ],
       remodelaciones: [
-        { nombre: "Diseño arquitectónico y redistribución de espacios", precio: "$350.000" },
-  { nombre: "Remodelación de fachadas", precio: "$250.000/m²" },
-  { nombre: "Ampliaciones de habitaciones o terrazas", precio: "$400.000/m²" },
-  { nombre: "Construcción y cerramientos interiores o exteriores", precio: "$280.000/m²" },
-  { nombre: "Cambio e instalación de ventanas y marcos", precio: "$180.000" },
-  { nombre: "Instalación de puertas interiores o de seguridad", precio: "$200.000" },
-  { nombre: "Reparación o cambio de techos", precio: "$180.000/m²" },
-  { nombre: "Instalación de techo falso o cielo raso en drywall", precio: "$120.000/m²" },
-  { nombre: "Impermeabilización de techos, terrazas y balcones", precio: "$200.000/m²" },
-  { nombre: "Instalación de pisos laminados, cerámicos o porcelanato", precio: "$95.000/m²" },
-  { nombre: "Pulido y restauración de pisos existentes", precio: "$80.000/m²" },
-  { nombre: "Enchape de baño o cocina", precio: "$150.000/m²" },
-  { nombre: "Revestimiento de paredes o fachadas con piedra decorativa", precio: "$190.000/m²" },
-  { nombre: "Aplicación de pintura interior o exterior", precio: "$7.000/m²" },
-  { nombre: "Texturizados, estuco o papel tapiz", precio: "$10.000/m²" },
-  { nombre: "Obra blanca y acabados finos", precio: "$120.000/m²" },
-  { nombre: "Carpintería a medida: closets, muebles empotrados, gabinetes", precio: "$250.000" },
-  { nombre: "Diseño y montaje de cocinas integrales", precio: "$800.000" },
-  { nombre: "Diseño y remodelación completa de baños", precio: "$650.000" },
-  { nombre: "Instalación de mesones en mármol o granito", precio: "$350.000" },
-  { nombre: "Iluminación decorativa empotrada o perimetral (LED)", precio: "$130.000" },
-  { nombre: "Instalación de lámparas colgantes y apliques", precio: "$70.000" },
-  { nombre: "Instalación de tiras LED o luz indirecta", precio: "$90.000" },
-  { nombre: "Vidriería: divisiones, puertas y ventanas en vidrio templado", precio: "$220.000" },
-  { nombre: "Protección solar: toldos, persianas y cortinas", precio: "$150.000" },
-  { nombre: "Automatización de luces y domótica básica", precio: "$300.000" },
-  { nombre: "Instalación de aislamiento térmico o acústico", precio: "$210.000/m²" },
-  { nombre: "Reparación de filtraciones, grietas y goteras", precio: "$80.000" },
-  { nombre: "Demoliciones y limpieza de obra", precio: "$90.000" },
-  { nombre: "Construcción de muros o refuerzo estructural", precio: "$250.000/m²" },
-  { nombre: "Instalación de rodapiés o zócalos", precio: "$45.000/m" },
-  { nombre: "Decoraciones con luces empotradas", precio: "$130.000" },
-  { nombre: "Acabados de obra civil: vaciado de losas y bases", precio: "$300.000/m²" },
-  { nombre: "Revestimientos exteriores: piedra, revoque o estuco", precio: "$150.000/m²" },
-  { nombre: "Jardinería o paisajismo ligero (patios, terrazas, jardines)", precio: "$250.000" },
-  { nombre: "Barandas, rejas y balcones exteriores", precio: "$200.000" },
-  { nombre: "Instalación de techos verdes o terrazas funcionales", precio: "$350.000" },
-  { nombre: "Mantenimiento general de fachadas y exteriores", precio: "$180.000" },
-  { nombre: "Remodelación completa de espacios interiores", precio: "$600.000/m²" },
-  { nombre: "Diseño 3D previo a remodelación", precio: "$400.000" },
-  { nombre: "Apertura de chazos y canalizaciones para obra civil", precio: "$45.000/m" },
-  { nombre: "Instalación de molduras decorativas y cielorrasos", precio: "$130.000/m²" },
-   ],
+        { nombre: "Diseño arquitectónico y redistribución", precio: "$450.000", desc:"Planos y renders básicos" },
+        { nombre: "Remodelación de fachadas", precio: "$320.000/m²", desc:"Acabados y protección" },
+        { nombre: "Ampliaciones (habitaciones/terraza)", precio: "$420.000/m²", desc:"Obra nueva y permisos" },
+        { nombre: "Cerramientos y muros", precio: "$300.000/m²", desc:"Albañilería y acabados" },
+        { nombre: "Instalación de ventanas y marcos", precio: "$220.000", desc:"Aislación y herrajes" },
+        { nombre: "Instalación de puertas y seguridad", precio: "$250.000", desc:"Puertas interiores y blindadas" },
+        { nombre: "Reparación y cambio de techos", precio: "$220.000/m²", desc:"Techos metálicos o teja" },
+        { nombre: "Instalación de cielo raso (drywall)", precio: "$140.000/m²", desc:"Acabado y pintura" },
+        { nombre: "Impermeabilización", precio: "$250.000/m²", desc:"Membranas y sellos" },
+        { nombre: "Instalación de pisos (porcelanato, madera)", precio: "$110.000/m²", desc:"Nivelación y colocación" },
+        { nombre: "Pulido y restauración de pisos", precio: "$95.000/m²", desc:"Pulido y sellado" },
+        { nombre: "Enchape de baño/cocina", precio: "$180.000/m²", desc:"Adhesivo y junta fina" },
+        { nombre: "Revestimientos en piedra/mármol", precio: "$220.000/m²", desc:"Colocación y sellado" },
+        { nombre: "Pintura interior/exterior", precio: "$9.000/m²", desc:"Imprimación y 2 manos" },
+        { nombre: "Obra blanca y acabados", precio: "$140.000/m²", desc:"Acabados finos y molduras" },
+        { nombre: "Carpintería a medida (closets, muebles)", precio: "$320.000", desc:"MDF o madera sólida" },
+        { nombre: "Cocinas integrales (montaje)", precio: "$1.000.000", desc:"Módulos y mesones" },
+        { nombre: "Baños completos (remodelación)", precio: "$850.000", desc:"Incluye sanitarios y grifería" },
+        { nombre: "Iluminación empotrada y decorativa", precio: "$170.000", desc:"LED empotrado y control" },
+        { nombre: "Paisajismo y jardines", precio: "$350.000", desc:"Diseño y plantación" },
+        { nombre: "Barandas y rejas", precio: "$260.000", desc:"Seguridad y estética" },
+        { nombre: "Techos verdes y terrazas", precio: "$420.000", desc:"Estructura y vegetación" },
+        { nombre: "Demoliciones y limpieza de obra", precio: "$120.000", desc:"Retiro y disposición segura" },
+        { nombre: "Apertura de chazos y canalizaciones", precio: "$60.000/m", desc:"Canalizaciones para instalaciones" },
+        { nombre: "Diseño 3D y render previo", precio: "$600.000", desc:"Visualización del proyecto" }
+      ],
+      rapidos: [
+  { nombre: "Cambio de bombillo o lámpara", precio: "$12.000", desc:"Sustitución rápida y prueba" },
+  { nombre: "Reparación rápida de corto/fuga pequeña", precio: "$25.000", desc:"Intervención express (pequeñas fugas o cortos)" },
+  { nombre: "Instalación de soporte TV (pequeño)", precio: "$45.000", desc:"Soporte básico y anclaje" },
+  { nombre: "Cambio de sifón o llave", precio: "$30.000", desc:"Reparación o reemplazo de sifones" },
+  { nombre: "Ajuste o sellado de inodoro", precio: "$35.000", desc:"Sellado y ajuste para fugas leves" },
+  { nombre: "Apertura de chazo menor (hasta 1m)", precio: "$40.000", desc:"Apertura y sellado rápido" },
+  { nombre: "Instalación de plafón o lámpara pequeña", precio: "$28.000", desc:"Montaje y conexión eléctrica" },
+  { nombre: "Pequeñas reparaciones domésticas", precio: "$25.000", desc:"Arreglos básicos (manitas)" },
+  { nombre: "Cambio de toma corriente o interruptor", precio: "$18.000", desc:"Reemplazo y prueba de funcionamiento" },
+  { nombre: "Sellado de filtraciones menores", precio: "$32.000", desc:"Corrección rápida de filtraciones" },
+  { nombre: "Cambio de enchufe o clavija", precio: "$15.000", desc:"Sustitución y testeo eléctrico" },
+  { nombre: "Revisión de breaker o tablero", precio: "$35.000", desc:"Chequeo básico de interruptores" },
+  { nombre: "Lubricación de cerraduras o bisagras", precio: "$10.000", desc:"Mantenimiento express de herrajes" },
+  { nombre: "Cambio de duchas o flexibles", precio: "$25.000", desc:"Reemplazo rápido de mangueras o duchas" },
+  { nombre: "Instalación de espejo pequeño", precio: "$30.000", desc:"Montaje seguro con nivelación" },
+  { nombre: "Ajuste de puertas o ventanas", precio: "$28.000", desc:"Alineación y ajuste de bisagras" },
+  { nombre: "Cambio de chapas sencillas", precio: "$35.000", desc:"Retiro e instalación básica" },
+  { nombre: "Siliconado de lavamanos o lavaplatos", precio: "$20.000", desc:"Sellado estético y funcional" },
+  { nombre: "Desmonte o montaje de repisas", precio: "$25.000", desc:"Instalación o retiro rápido" },
+  { nombre: "Instalación de cortina de baño", precio: "$15.000", desc:"Montaje y nivelación básica" },
+  { nombre: "Cambio de empaques en grifería", precio: "$20.000", desc:"Previene fugas pequeñas" },
+  { nombre: "Limpieza de sifón o desagüe leve", precio: "$25.000", desc:"Desbloqueo rápido sin obra" },
+  { nombre: "Instalación de cuadro o decoración", precio: "$15.000", desc:"Montaje alineado y seguro" },
+  { nombre: "Sellado de ventana o rendija", precio: "$20.000", desc:"Corrección de filtraciones de aire o agua" },
+  { nombre: "Revisión de timbre o citófono", precio: "$18.000", desc:"Diagnóstico y reparación básica" }
+]
+
     };
 
-    function mostrarServicios(tipo) {
-      const contenedor = document.getElementById("servicios");
-      contenedor.innerHTML = "";
-      dataServicios[tipo].forEach(servicio => {
-        const div = document.createElement("div");
-        div.classList.add("servicio");
-        div.innerHTML = `<h3>${servicio.nombre}</h3><p>${servicio.precio}</p>`;
-        contenedor.appendChild(div);
-        setTimeout(() => div.classList.add("visible"), 100);
+    /* ===== UI: quick services (aside) ===== */
+    const quickServicesEl = document.getElementById('quickServices');
+
+    // fill quick services aside from rapidos (so they are selectable)
+    dataServicios.rapidos.forEach((sv, idx) => {
+      const id = `quick_rapidos_${idx}`;
+      const item = document.createElement('div');
+      item.className = 'service-item';
+      item.innerHTML = `
+        <label>
+          <input type="checkbox" id="${id}" data-cat="rapidos" data-name="${sv.nombre}">
+          <span style="margin-left:8px">${sv.nombre}</span>
+        </label>
+        <div class="service-price">${sv.precio}</div>
+      `;
+      quickServicesEl.appendChild(item);
+
+      // checkbox event: reuse selection logic
+      const chk = item.querySelector('input[type="checkbox"]');
+      chk.addEventListener('change', (e) => {
+        toggleSelection(e.target.dataset.cat, e.target.dataset.name, e.target.checked);
+      });
+    });
+
+    /* ===== Render cards & checkbox logic ===== */
+    const cardsGrid = document.getElementById('cardsGrid');
+    const selectionBar = document.getElementById('selectionBar');
+    const selCountEl = document.getElementById('selCount');
+    const clearSelBtn = document.getElementById('clearSel');
+    const sendWhatsBtn = document.getElementById('sendWhats');
+
+    let selections = {}; // { "electricidad":[names], "plomeria":[...], "remodelaciones":[...], "rapidos": [...] }
+
+    function renderCategory(cat){
+      cardsGrid.innerHTML='';
+      (dataServicios[cat] || []).forEach((sv,i)=>{
+        const c = document.createElement('article');
+        c.className='card';
+        const id = `chk_${cat}_${i}`;
+        const imgHtml = sv.img ? `<img loading="lazy" class="card-img" src="${sv.img}" alt="${sv.nombre}">` : '';
+        c.innerHTML = `
+          ${imgHtml}
+          <h3>${sv.nombre}</h3>
+          <div class="price">${sv.precio}</div>
+          <div class="desc">${sv.desc || ''}</div>
+          <div class="service-checkbox">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <input type="checkbox" id="${id}" data-cat="${cat}" data-name="${sv.nombre}">
+              <span>Seleccionar</span>
+            </label>
+          </div>
+        `;
+        cardsGrid.appendChild(c);
+        setTimeout(()=>c.classList.add('visible'), 80*i);
+
+        // checkbox event
+        const chk = c.querySelector('input[type="checkbox"]');
+        chk.addEventListener('change', (e)=>{
+          const cat = e.target.dataset.cat;
+          const name = e.target.dataset.name;
+          toggleSelection(cat, name, e.target.checked);
+          // keep aside quick checkboxes in sync if rapidos
+          if(cat === 'rapidos'){
+            const quickChk = document.querySelector(`#quickServices input[data-name="${name}"]`);
+            if(quickChk) quickChk.checked = e.target.checked;
+          }
+        });
+      });
+      // attach observer for newly created cards
+      setTimeout(()=>observeCards(),50);
+    }
+    // render initial
+    renderCategory('electricidad');
+
+    // category buttons
+    document.querySelectorAll('.cat-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCategory(btn.dataset.cat);
+        setTimeout(()=>cardsGrid.scrollIntoView({behavior:'smooth',block:'center'}),120);
+      });
+    });
+
+    // selection helpers
+    function toggleSelection(cat,name,checked){
+      if(!selections[cat]) selections[cat]=[];
+      if(checked){
+        if(!selections[cat].includes(name)) selections[cat].push(name);
+      } else {
+        selections[cat] = selections[cat].filter(x=>x!==name);
+      }
+      updateSelectionUI();
+      // sync checkboxes across sections: ensure all matching checkboxes reflect state
+      document.querySelectorAll(`input[type="checkbox"][data-name="${name}"]`).forEach(chk=>{
+        if(chk.checked !== checked) chk.checked = checked;
       });
     }
+
+    function updateSelectionUI(){
+      // count total
+      const total = Object.values(selections).reduce((acc,arr)=>acc + (arr?arr.length:0),0);
+      selCountEl.textContent = total;
+      selectionBar.style.display = total>0 ? 'flex' : 'none';
+      sendWhatsBtn.disabled = total === 0;
+    }
+
+    clearSelBtn.addEventListener('click', ()=>{
+      // clear selections state
+      selections = {};
+      // uncheck all checkboxes in DOM
+      document.querySelectorAll('input[type="checkbox"]').forEach(chk=>chk.checked=false);
+      // re-render current category to reset UI (optional)
+      document.querySelectorAll('.card').forEach(c=>c.classList.remove('visible'));
+      setTimeout(()=>{
+        const active = document.querySelector('.cat-btn.active').dataset.cat;
+        renderCategory(active);
+      },100);
+      updateSelectionUI();
+    });
+
+    // Send by WhatsApp: group selections by category and generate message
+    sendWhatsBtn.addEventListener('click', ()=>{
+      const total = Object.values(selections).reduce((acc,arr)=>acc + (arr?arr.length:0),0);
+      if(total === 0){
+        alert('Selecciona al menos un servicio antes de enviar.');
+        return;
+      }
+
+      let lines = [];
+      lines.push('Hola, soy cliente interesado en los siguientes servicios:');
+      for(const cat of ['electricidad','plomeria','remodelaciones','rapidos']){
+        if(selections[cat] && selections[cat].length){
+          // category friendly name
+          const catName = cat === 'electricidad' ? 'Electricidad' : (cat === 'plomeria' ? 'Plomería' : (cat === 'rapidos' ? 'Servicios Rápidos' : 'Remodelaciones'));
+          lines.push('');
+          lines.push(`*${catName}*`);
+          selections[cat].forEach(svc => lines.push('- ' + svc));
+        }
+      }
+      lines.push('');
+      lines.push('¿Me pueden enviar una cotización y disponibilidad? Gracias.');
+      const message = lines.join('\n');
+
+      // WhatsApp number: +57 3026645791 -> wa.me/573026645791
+      const phone = '573026645791';
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      // open in new tab
+      window.open(url, '_blank');
+    });
+
+    // verServiciosBtn scroll
+    document.getElementById('verServiciosBtn').addEventListener('click', ()=>{
+      document.querySelector('[data-cat="electricidad"]').scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(()=>document.getElementById('cardsGrid').scrollIntoView({behavior:'smooth',block:'start'}),120);
+    });
+
+    /* ========================
+       Canvas Particles (ligero)
+       ======================== */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+    let particles = [];
+    const PCOUNT = Math.round((w*h)/90000);
+
+    function rand(min,max){ return Math.random()*(max-min)+min }
+    function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; particles=[]; init(); }
+    window.addEventListener('resize', resize);
+
+    function init(){
+      for(let i=0;i<PCOUNT;i++){
+        particles.push({
+          x: rand(0,w),
+          y: rand(0,h),
+          r: rand(0.6,2.4),
+          vx: rand(-0.15,0.15),
+          vy: rand(-0.05,0.2),
+          alpha: rand(0.08,0.28),
+          sway: rand(0.002,0.01)
+        });
+      }
+    }
+    function step(){
+      ctx.clearRect(0,0,w,h);
+      for(let p of particles){
+        p.x += p.vx + Math.sin(Date.now()*p.sway)*0.15;
+        p.y -= p.vy;
+        if(p.y < -10) p.y = h + 10;
+        if(p.x < -20) p.x = w + 20;
+        if(p.x > w + 20) p.x = -20;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(step);
+    }
+    init(); step();
+
+    /* Accessibility: reduce motion */
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(media.matches){
+      document.querySelectorAll('.hero-veil, #particles').forEach(el=>el.style.display='none');
+      document.querySelectorAll('.card').forEach(c=>c.style.transition='none');
+    }
+
+    /* IntersectionObserver for cards */
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, {threshold:0.12});
+    // observe new cards when rendered: small helper
+    const observeCards = ()=>document.querySelectorAll('.card').forEach(el=>io.observe(el));
+    observeCards();
+
+    // ensure observer re-attaches after re-render
+    const originalRender = renderCategory;
+    const wrappedRender = (cat)=>{ originalRender(cat); setTimeout(()=>observeCards(),50); };
+    // replace for later use
+    // (we already declared renderCategory as function; to avoid redeclaration issues, we won't override here)
+
+    // initialize selection UI state
+    updateSelectionUI();
+
   </script>
 </body>
 </html>
-
